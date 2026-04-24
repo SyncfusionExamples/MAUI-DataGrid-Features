@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.DataGrid;assembly=Syncfusion.Maui.DataGrid"
+             xmlns:editors="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
+             xmlns:local="clr-namespace:Selection.ViewModels"
+             x:Class="Selection.MainPage">
+
+    <ContentPage.BindingContext>
+        <local:ProductInventoryViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <Style TargetType="syncfusion:DataGridHeaderCell">
+            <Setter Property="FontFamily"
+                    Value="Roboto-Medium" />
+        </Style>
+        <Style TargetType="syncfusion:DataGridCell">
+            <Setter Property="FontFamily"
+                    Value="Roboto-Regular" />
+        </Style>
+
+        <OnPlatform x:Key="minimumWidth" x:TypeArguments="x:Double">
+            <On Platform="Android,iOS" Value="170"></On>
+            <On Platform="WinUI,MacCatalyst" Value="180"></On>
+        </OnPlatform>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <Grid RowDefinitions="Auto,*">
+            <Grid Grid.Row="0"  RowDefinitions="Auto,Auto">
+                <HorizontalStackLayout HorizontalOptions="Start" Margin="10,0,0,10" Grid.Row="0">
+                    <Label Text="Selection Mode" Margin="0,0,10,0" WidthRequest="105" VerticalOptions="Center" FontAttributes="Bold"/>
+
+                    <editors:SfComboBox x:Name="modeComboBox" 
+                                        WidthRequest="{StaticResource Key=minimumWidth}"
+                                        HeightRequest = "50"
+                                        SelectionChanged="modeComboBox_SelectionChanged">
+
+                        <editors:SfComboBox.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>Single</x:String>
+                                <x:String>Multiple</x:String>
+                                <x:String>SingleDeselect</x:String>
+                                <x:String>Extended</x:String>
+                                <x:String>None</x:String>
+                            </x:Array>
+                        </editors:SfComboBox.ItemsSource>
+
+                    </editors:SfComboBox>
+
+                </HorizontalStackLayout>
+
+                <HorizontalStackLayout HorizontalOptions="Start" Margin="10,0,0,10" Grid.Row="1">
+
+                    <Label Text="Selection Unit" Margin="0,0,10,0" WidthRequest="105" VerticalOptions="Center" FontAttributes="Bold"/>
+
+                    <editors:SfComboBox x:Name="unitComboBox" 
+                                        WidthRequest="{StaticResource Key=minimumWidth}"
+                                        HeightRequest = "50"
+                                        SelectionChanged="unitComboBox_SelectionChanged">
+
+                        <editors:SfComboBox.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>Any</x:String>
+                                <x:String>Cell</x:String>
+                                <x:String>Row</x:String>
+                            </x:Array>
+                        </editors:SfComboBox.ItemsSource>
+
+                    </editors:SfComboBox>
+
+                </HorizontalStackLayout>
+
+            </Grid>
+
+            <syncfusion:SfDataGrid ItemsSource="{Binding Products}"
+                                   AutoGenerateColumnsMode="None"
+                                   ColumnWidthMode="Fill"
+                                   x:Name="dataGrid"
+                                   Grid.Row="1">
+                <syncfusion:SfDataGrid.Columns>
+                    <syncfusion:DataGridNumericColumn MappingName="ProductId"
+                                          HeaderText="Product ID"
+                                          Format="N0"
+                                          HeaderTextAlignment="Center"
+                                          CellTextAlignment="Center" />
+                    <syncfusion:DataGridTextColumn MappingName="ProductName"
+                                       HeaderText="Product Name"
+                                       Width="150" />
+                    <syncfusion:DataGridTextColumn MappingName="SKU"
+                                       HeaderText="SKU" />
+                    <syncfusion:DataGridTextColumn MappingName="Category"
+                                       HeaderText="Category"
+                                       Width="120" />
+                    <syncfusion:DataGridTextColumn MappingName="Supplier"
+                                       HeaderText="Supplier"
+                                       Width="150" />
+                    <syncfusion:DataGridNumericColumn MappingName="QuantityInStock"
+                                          HeaderText="Quantity"
+                                          Format="N0"
+                                          HeaderTextAlignment="End"
+                                          CellTextAlignment="End" />
+                    <syncfusion:DataGridNumericColumn MappingName="ReorderLevel"
+                                          HeaderText="Reorder Level"
+                                          Width="120"
+                                          Format="N0"
+                                          HeaderTextAlignment="End"
+                                          CellTextAlignment="End" />
+                    <syncfusion:DataGridTextColumn MappingName="StockStatus"
+                                       HeaderText="Stock Status"
+                                       Width="125" />
+                    <syncfusion:DataGridNumericColumn MappingName="UnitPrice"
+                                          HeaderText="Unit Price"
+                                          Format="C"
+                                          CellTextAlignment="End" />
+                    <syncfusion:DataGridNumericColumn MappingName="Discount"
+                                          HeaderText="Discount"
+                                          Format="N0"
+                                          CellTextAlignment="End" />
+                    <syncfusion:DataGridNumericColumn MappingName="TotalValue"
+                                          HeaderText="Total Value"
+                                          Width="130"
+                                          Format="C"
+                                          HeaderTextAlignment="End"
+                                          CellTextAlignment="End" />
+                    <syncfusion:DataGridDateColumn MappingName="ManufactureDate"
+                                       HeaderText="Manufactured On"
+                                       Width="150"
+                                       Format="dd-MMM-yyyy" />
+                    <syncfusion:DataGridDateColumn MappingName="ExpiryDate"
+                                       HeaderText="Expiry Date"
+                                       Width="130"
+                                       Format="dd-MMM-yyyy" />
+                    <syncfusion:DataGridCheckBoxColumn MappingName="IsDiscontinued"
+                                           HeaderText="Discontinued"
+                                           Width="120" />
+                    <syncfusion:DataGridTextColumn MappingName="WarehouseLocation"
+                                       Width="140"
+                                       HeaderText="Warehouse" />
+                </syncfusion:SfDataGrid.Columns>
+            </syncfusion:SfDataGrid>
+        </Grid>
+
+    </ContentPage.Content>
+
+</ContentPage>
