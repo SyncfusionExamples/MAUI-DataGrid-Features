@@ -1,0 +1,117 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\MAUI\\Samples\\Paging\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{6BAB4569-6406-B1F2-9E6E-DEAAAA0D3090}|Paging\\Paging.csproj|d:\\maui\\samples\\paging\\paging\\mainpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{6BAB4569-6406-B1F2-9E6E-DEAAAA0D3090}|Paging\\Paging.csproj|solutionrelative:paging\\mainpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6BAB4569-6406-B1F2-9E6E-DEAAAA0D3090}|Paging\\Paging.csproj|d:\\maui\\samples\\paging\\paging\\paging.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{6BAB4569-6406-B1F2-9E6E-DEAAAA0D3090}|Paging\\Paging.csproj|solutionrelative:paging\\paging.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6BAB4569-6406-B1F2-9E6E-DEAAAA0D3090}|Paging\\Paging.csproj|d:\\maui\\samples\\paging\\paging\\mauiprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6BAB4569-6406-B1F2-9E6E-DEAAAA0D3090}|Paging\\Paging.csproj|solutionrelative:paging\\mauiprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6BAB4569-6406-B1F2-9E6E-DEAAAA0D3090}|Paging\\Paging.csproj|d:\\maui\\samples\\paging\\paging\\mainpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6BAB4569-6406-B1F2-9E6E-DEAAAA0D3090}|Paging\\Paging.csproj|solutionrelative:paging\\mainpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6BAB4569-6406-B1F2-9E6E-DEAAAA0D3090}|Paging\\Paging.csproj|d:\\maui\\samples\\paging\\paging\\viewmodels\\productinventoryviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6BAB4569-6406-B1F2-9E6E-DEAAAA0D3090}|Paging\\Paging.csproj|solutionrelative:paging\\viewmodels\\productinventoryviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6BAB4569-6406-B1F2-9E6E-DEAAAA0D3090}|Paging\\Paging.csproj|d:\\maui\\samples\\paging\\paging\\models\\productinventorymodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6BAB4569-6406-B1F2-9E6E-DEAAAA0D3090}|Paging\\Paging.csproj|solutionrelative:paging\\models\\productinventorymodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MainPage.xaml",
+              "DocumentMoniker": "D:\\MAUI\\Samples\\Paging\\Paging\\MainPage.xaml",
+              "RelativeDocumentMoniker": "Paging\\MainPage.xaml",
+              "ToolTip": "D:\\MAUI\\Samples\\Paging\\Paging\\MainPage.xaml",
+              "RelativeToolTip": "Paging\\MainPage.xaml",
+              "ViewState": "AgIAAE4AAAAAAAAAAAAAAFgAAABSAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-04-24T05:50:03.757Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Paging.csproj",
+              "DocumentMoniker": "D:\\MAUI\\Samples\\Paging\\Paging\\Paging.csproj",
+              "RelativeDocumentMoniker": "Paging\\Paging.csproj",
+              "ToolTip": "D:\\MAUI\\Samples\\Paging\\Paging\\Paging.csproj",
+              "RelativeToolTip": "Paging\\Paging.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-04-24T05:47:56.886Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MauiProgram.cs",
+              "DocumentMoniker": "D:\\MAUI\\Samples\\Paging\\Paging\\MauiProgram.cs",
+              "RelativeDocumentMoniker": "Paging\\MauiProgram.cs",
+              "ToolTip": "D:\\MAUI\\Samples\\Paging\\Paging\\MauiProgram.cs",
+              "RelativeToolTip": "Paging\\MauiProgram.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-24T05:50:29.306Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "MainPage.xaml.cs",
+              "DocumentMoniker": "D:\\MAUI\\Samples\\Paging\\Paging\\MainPage.xaml.cs",
+              "RelativeDocumentMoniker": "Paging\\MainPage.xaml.cs",
+              "ToolTip": "D:\\MAUI\\Samples\\Paging\\Paging\\MainPage.xaml.cs",
+              "RelativeToolTip": "Paging\\MainPage.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-24T05:50:06.046Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ProductInventoryViewModel.cs",
+              "DocumentMoniker": "D:\\MAUI\\Samples\\Paging\\Paging\\ViewModels\\ProductInventoryViewModel.cs",
+              "RelativeDocumentMoniker": "Paging\\ViewModels\\ProductInventoryViewModel.cs",
+              "ToolTip": "D:\\MAUI\\Samples\\Paging\\Paging\\ViewModels\\ProductInventoryViewModel.cs",
+              "RelativeToolTip": "Paging\\ViewModels\\ProductInventoryViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAHAAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-24T05:49:41.906Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ProductInventoryModel.cs",
+              "DocumentMoniker": "D:\\MAUI\\Samples\\Paging\\Paging\\Models\\ProductInventoryModel.cs",
+              "RelativeDocumentMoniker": "Paging\\Models\\ProductInventoryModel.cs",
+              "ToolTip": "D:\\MAUI\\Samples\\Paging\\Paging\\Models\\ProductInventoryModel.cs",
+              "RelativeToolTip": "Paging\\Models\\ProductInventoryModel.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAADwvxcAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-24T05:49:05.1Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
