@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.DataGrid;assembly=Syncfusion.Maui.DataGrid"
+             xmlns:local="clr-namespace:Theming"
+             x:Class="Theming.MainPage">
+
+    <ContentPage.BindingContext>
+        <local:ProductInventoryViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <Color x:Key="lightThemeColor">#66C4D4FD</Color>
+        <Color x:Key="darkThemeColor">#661849A9</Color>
+        <Color x:Key="headerLightThemeColor">#C4D4FD</Color>
+        <Color x:Key="headerDarkThemeColor">#1849A9</Color>
+        <Style TargetType="syncfusion:DataGridHeaderCell">
+            <Setter Property="FontFamily"
+            Value="Roboto-Medium" />
+        </Style>
+        <Style TargetType="syncfusion:DataGridCell">
+            <Setter Property="FontFamily"
+            Value="Roboto-Regular" />
+        </Style>
+        <Style TargetType="syncfusion:DataGridHeaderRow">
+            <Setter Property="Background"
+         Value="{AppThemeBinding Light={StaticResource headerLightThemeColor}, Dark={StaticResource headerDarkThemeColor}}" />
+        </Style>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <Grid RowDefinitions="50,*">
+            <HorizontalStackLayout Spacing="10" Padding="10,0,0,0">
+                <Label Text="Dark Theme"  VerticalOptions="Center" FontAttributes="Bold"/>
+                <Switch Toggled="Switch_Toggled" />
+            </HorizontalStackLayout>
+            <syncfusion:SfDataGrid ItemsSource="{Binding Products}"
+                AutoGenerateColumnsMode="None"
+                               Grid.Row="1">
+                <syncfusion:SfDataGrid.DefaultStyle>
+                    <syncfusion:DataGridStyle AlternateRowBackground="{AppThemeBinding Light={StaticResource lightThemeColor}, Dark={StaticResource darkThemeColor}}"/>
+                </syncfusion:SfDataGrid.DefaultStyle>
+                <syncfusion:SfDataGrid.Columns>
+                    <syncfusion:DataGridNumericColumn MappingName="ProductId"
+                                   HeaderText="Product ID"
+                                   Format="N0"
+                                   HeaderTextAlignment="Center"
+                                   CellTextAlignment="Center" 
+                                              />
+                    <syncfusion:DataGridTextColumn MappingName="ProductName"
+                                HeaderText="Product Name"
+                                Width="150" />
+                    <syncfusion:DataGridTextColumn MappingName="SKU"
+                                HeaderText="SKU" />
+                    <syncfusion:DataGridTextColumn MappingName="Category"
+                                HeaderText="Category"
+                                Width="120" />
+                    <syncfusion:DataGridTextColumn MappingName="Supplier"
+                                HeaderText="Supplier"
+                                Width="150" />
+                    <syncfusion:DataGridNumericColumn MappingName="QuantityInStock"
+                                   HeaderText="Quantity"
+                                   Format="N0"
+                                   HeaderTextAlignment="End"
+                                   CellTextAlignment="End">
+                    </syncfusion:DataGridNumericColumn>
+                    <syncfusion:DataGridNumericColumn MappingName="ReorderLevel"
+                                   HeaderText="Reorder Level"
+                                   Width="120"
+                                   Format="N0"
+                                   HeaderTextAlignment="End"
+                                   CellTextAlignment="End" />
+                    <syncfusion:DataGridTextColumn MappingName="StockStatus"
+                                HeaderText="Stock Status"
+                                Width="125">
+                    </syncfusion:DataGridTextColumn>
+                    <syncfusion:DataGridNumericColumn MappingName="UnitPrice"
+                                   HeaderText="Unit Price"
+                                   Format="C"
+                                   CellTextAlignment="End" />
+                    <syncfusion:DataGridNumericColumn MappingName="Discount"
+                                   HeaderText="Discount"
+                                   Format="N0"
+                                   CellTextAlignment="End" />
+                    <syncfusion:DataGridNumericColumn MappingName="TotalValue"
+                                   HeaderText="Total Value"
+                                   Width="130"
+                                   Format="C"
+                                   HeaderTextAlignment="End"
+                                   CellTextAlignment="End" />
+                    <syncfusion:DataGridDateColumn MappingName="ManufactureDate"
+                                HeaderText="Manufactured On"
+                                Width="150"
+                                Format="dd-MMM-yyyy" />
+                    <syncfusion:DataGridDateColumn MappingName="ExpiryDate"
+                                HeaderText="Expiry Date"
+                                Width="130"
+                                Format="dd-MMM-yyyy" />
+                    <syncfusion:DataGridCheckBoxColumn MappingName="IsDiscontinued"
+                                    HeaderText="Discontinued"
+                                    Width="120" />
+                    <syncfusion:DataGridTextColumn MappingName="WarehouseLocation"
+                                Width="140"
+                                HeaderText="Warehouse" />
+                </syncfusion:SfDataGrid.Columns>
+            </syncfusion:SfDataGrid>
+        </Grid>
+
+    </ContentPage.Content>
+
+</ContentPage>
