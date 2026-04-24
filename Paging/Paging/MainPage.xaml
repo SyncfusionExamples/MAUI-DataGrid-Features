@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.DataGrid;assembly=Syncfusion.Maui.DataGrid"
+             xmlns:sfpager="clr-namespace:Syncfusion.Maui.DataGrid.DataPager;assembly=Syncfusion.Maui.DataGrid"
+             xmlns:local="clr-namespace:Paging.ViewModels"
+             x:Class="Paging.MainPage">
+
+    <ContentPage.BindingContext>
+        <local:ProductInventoryViewModel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <Style TargetType="syncfusion:DataGridHeaderCell">
+            <Setter Property="FontFamily"
+                    Value="Roboto-Medium"/>
+        </Style>
+        <Style TargetType="syncfusion:DataGridCell">
+            <Setter Property="FontFamily"
+                    Value="Roboto-Regular"/>
+        </Style>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <syncfusion:SfDataGrid  ItemsSource="{Binding Source={x:Reference dataPager}, Path=PagedSource }"
+                                    AutoGenerateColumnsMode="None">
+                <syncfusion:SfDataGrid.Columns>
+                    <syncfusion:DataGridNumericColumn MappingName="ProductId"
+                                                      HeaderText="Product ID"
+                                                      Format="N0"
+                                                      HeaderTextAlignment="Center"
+                                                      CellTextAlignment="Center"/>
+                    <syncfusion:DataGridTextColumn MappingName="ProductName"
+                                                   HeaderText="Product Name"
+                                                   Width="150"/>
+                    <syncfusion:DataGridTextColumn MappingName="SKU"
+                                                   HeaderText="SKU"/>
+                    <syncfusion:DataGridTextColumn MappingName="Category"
+                                                   HeaderText="Category"
+                                                   Width="120"/>
+                    <syncfusion:DataGridTextColumn MappingName="Supplier"
+                                                   HeaderText="Supplier"
+                                                   Width="150"/>
+                    <syncfusion:DataGridNumericColumn MappingName="QuantityInStock"
+                                                      HeaderText="Quantity"
+                                                      Format="N0"
+                                                      HeaderTextAlignment="End"
+                                                      CellTextAlignment="End"/>
+                    <syncfusion:DataGridNumericColumn MappingName="ReorderLevel"
+                                                      HeaderText="Reorder Level"
+                                                      Width="120"
+                                                      Format="N0"
+                                                      HeaderTextAlignment="End"
+                                                      CellTextAlignment="End"/>
+                    <syncfusion:DataGridTextColumn MappingName="StockStatus"
+                                                   HeaderText="Stock Status"
+                                                   Width="125"/>
+                    <syncfusion:DataGridNumericColumn MappingName="UnitPrice"
+                                                      HeaderText="Unit Price"
+                                                      Format="C"
+                                                      CellTextAlignment="End"/>
+                    <syncfusion:DataGridNumericColumn MappingName="Discount"
+                                                      HeaderText="Discount"
+                                                      Format="N0"
+                                                      CellTextAlignment="End"/>
+                    <syncfusion:DataGridNumericColumn MappingName="TotalValue"
+                                                      HeaderText="Total Value"
+                                                      Width="130"
+                                                      Format="C"
+                                                      HeaderTextAlignment="End"
+                                                      CellTextAlignment="End"/>
+                    <syncfusion:DataGridDateColumn MappingName="ManufactureDate"
+                                                   HeaderText="Manufactured On"
+                                                   Width="150"
+                                                   Format="dd-MMM-yyyy"/>
+                    <syncfusion:DataGridDateColumn MappingName="ExpiryDate"
+                                                   HeaderText="Expiry Date"
+                                                   Width="130"
+                                                   Format="dd-MMM-yyyy"/>
+                    <syncfusion:DataGridCheckBoxColumn MappingName="IsDiscontinued"
+                                                       HeaderText="Discontinued"
+                                                       Width="120"/>
+                    <syncfusion:DataGridTextColumn MappingName="WarehouseLocation"
+                                                   Width="140"
+                                                   HeaderText="Warehouse"/>
+                </syncfusion:SfDataGrid.Columns>
+            </syncfusion:SfDataGrid>
+
+            <sfpager:SfDataPager x:Name="dataPager"
+                                 Grid.Row="1"
+                                 Margin="7.5,17.5,7.5,8.5"
+                                 HorizontalOptions="Fill"
+                                 VerticalOptions="Center"
+                                 HeightRequest="36"
+                                 ButtonSize="36"
+                                 ButtonSpacing="8"
+                                 ButtonFontSize="14"
+                                 PageSize="250"
+                                 PageCount="12"
+                                 NumericButtonCount="{OnPlatform iOS='6',MacCatalyst='12',Android='6',WinUI='12'}"
+                                 x:DataType="local:ProductInventoryViewModel"
+                                 Source="{Binding Products}">
+            </sfpager:SfDataPager>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
