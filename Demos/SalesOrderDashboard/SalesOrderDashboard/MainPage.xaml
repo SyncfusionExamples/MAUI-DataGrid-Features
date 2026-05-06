@@ -1,0 +1,377 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.DataGrid;assembly=Syncfusion.Maui.DataGrid"
+             xmlns:datapager="clr-namespace:Syncfusion.Maui.DataGrid.DataPager;assembly=Syncfusion.Maui.DataGrid"
+             xmlns:inputs="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
+             xmlns:popup="clr-namespace:Syncfusion.Maui.Popup;assembly=Syncfusion.Maui.Popup"
+             xmlns:local="clr-namespace:SalesOrderDashboard.ViewModel"
+             xmlns:converters="clr-namespace:SalesOrderDashboard.Converters"
+             x:Class="SalesOrderDashboard.MainPage">
+
+    <ContentPage.BindingContext>
+        <local:OrderInfoRepository x:Name="viewModel" />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:PaymentStatusToColorConverter x:Key="PaymentStatusToColor"/>
+            <converters:CountryToFlagConverter x:Key="CountryToFlagConverter"/>
+            <converters:ForeColorConverter x:Key="foreColorconverter"/>
+            <converters:RowHeaderIsDataRowConverter x:Key="RowHeaderIsDataRowConverter"/>
+            <converters:FreightCellBackgroundConverter x:Key="FreightCellBackgroundConverter"/>
+
+            <Style TargetType="syncfusion:DataGridTableSummaryCell">
+                <Setter Property="TextColor" Value="#D32F2F" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="FontSize" Value="13" />
+                <Setter Property="Padding" Value="12,8" />
+                <Setter Property="FontFamily" Value="Roboto-Regular" />
+            </Style>
+
+            <Style TargetType="syncfusion:DataGridCell">
+                <Setter Property="TextColor" Value="{Binding Source={RelativeSource Mode=Self}, Converter={StaticResource Key=foreColorconverter}}"/>
+                <Setter Property="FontFamily" Value="Roboto-Regular" />
+                <Setter Property="Background" Value="{Binding Source={RelativeSource Mode=Self}, Converter={StaticResource FreightCellBackgroundConverter}}"/>
+            </Style>
+
+            <Style TargetType="syncfusion:DataGridHeaderCell">
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="TextColor" Value="#1F2937"/>
+                <Setter Property="FontFamily" Value="Roboto-Regular" />
+            </Style>
+
+            <Style TargetType="syncfusion:DataGridTableSummaryRowView">
+                <Setter Property="Background" Value="#F1F5FF" />
+            </Style>
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <Grid RowDefinitions="Auto,*,Auto" Padding="10">
+
+            <Grid Grid.Row="0" Padding="10,0,10,10">
+                <HorizontalStackLayout HorizontalOptions="Fill"
+                           VerticalOptions="Center"
+                           Spacing="20"
+                           Padding="0,0,0,0">
+
+                    <SearchBar x:Name="searchBar"
+                               Placeholder="Search"
+                               PlaceholderColor="Gray"
+                               FontSize="14"
+                               BackgroundColor="White"
+                               TextColor="Black"
+                               HeightRequest="40"
+                               WidthRequest="400"
+                               HorizontalOptions="Start"
+                               VerticalOptions="Center"
+                               SearchButtonPressed="searchBar_SearchButtonPressed"
+                               TextChanged="searchBar_TextChanged"/>
+
+                    <Border WidthRequest="1"
+                            HeightRequest="40"
+                            BackgroundColor="#D1D5DB"
+                            Opacity="0.9"
+                            VerticalOptions="Center"
+                            Margin="12,0" />
+
+                    <inputs:SfComboBox x:Name="CustomerComboBox"
+                           WidthRequest="200"
+                           HeightRequest="40"
+                           Margin="10,0,0,0"
+                           Placeholder="Sorting"
+                           ItemsSource="{Binding SortableProperties}"
+                           SelectionChanged="CustomerComboBox_SelectionChanged"
+                           EnableAutoSize="True"
+                           HorizontalOptions="Start"
+                           VerticalOptions="Center"/>
+
+                    <inputs:SfComboBox x:Name="LinesComboBox"
+                           WidthRequest="60"
+                           HeightRequest="40"
+                           Margin="0,0,0,0"
+                           Placeholder="Grid lines"
+                           DisplayMemberPath="Text"
+                           SelectionChanged="LinesComboBox_SelectionChanged"
+                           EnableAutoSize="True"
+                           HorizontalOptions="Start"
+                           VerticalOptions="Center">
+                        <inputs:SfComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Padding="6,0" HorizontalOptions="Start" VerticalOptions="Center">
+                                    <Image Source="{Binding Icon}" WidthRequest="18" HeightRequest="18" Aspect="AspectFit"/>
+                                </Grid>
+                            </DataTemplate>
+                        </inputs:SfComboBox.ItemTemplate>
+                        <inputs:SfComboBox.CustomView>
+                            <Grid Padding="6,0" HorizontalOptions="Start" VerticalOptions="Center">
+                                <Image Source="{Binding Source={x:Reference LinesComboBox}, Path=SelectedItem.Icon}"
+                                       WidthRequest="18" HeightRequest="18" Aspect="AspectFit"/>
+                            </Grid>
+                        </inputs:SfComboBox.CustomView>
+                    </inputs:SfComboBox>
+
+                    <Border WidthRequest="1"
+                            HeightRequest="40"
+                            BackgroundColor="#D1D5DB"
+                            Opacity="0.9"
+                            VerticalOptions="Center"
+                            Margin="12,0" />
+
+                    <HorizontalStackLayout HorizontalOptions="End"
+                               Spacing="10"
+                               VerticalOptions="Center">
+                        <Grid HeightRequest="40"
+                              WidthRequest="40"
+                              BackgroundColor="LightGray"
+                              HorizontalOptions="Center"
+                              VerticalOptions="Center">
+                            <Image Source="pdf.png"
+                                   WidthRequest="20"
+                                   HeightRequest="20"
+                                   Aspect="AspectFit"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnExportToPdfClicked"/>
+                                </Image.GestureRecognizers>
+                            </Image>
+                        </Grid>
+
+                        <Grid HeightRequest="40"
+                              WidthRequest="40"
+                              BackgroundColor="LightGray"
+                              HorizontalOptions="Center"
+                              VerticalOptions="Center">
+                            <Image Source="excel.png"
+                                   WidthRequest="20"
+                                   HeightRequest="20"
+                                   Aspect="AspectFit"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnExportToExcelClicked"/>
+                                </Image.GestureRecognizers>
+                            </Image>
+                        </Grid>
+                    </HorizontalStackLayout>
+
+                </HorizontalStackLayout>
+            </Grid>
+
+            <Grid Grid.Row="2" ColumnDefinitions="*,Auto" Margin="0,4,0,0">
+
+                <datapager:SfDataPager x:Name="dataPager"
+                                       Source="{Binding OrderInfoCollection}"
+                                       PageSize="10"
+                                       NumericButtonCount="10"
+                                       HorizontalOptions="Start"/>
+
+                <HorizontalStackLayout Grid.Column="1" Spacing="8" HorizontalOptions="Start" VerticalOptions="Center" Padding="0,0,20,0">
+                    <Label Text="Items per page:" VerticalOptions="Center"/>
+                    <Picker x:Name="pageSizePicker" WidthRequest="110">
+                        <Picker.Items>
+                            <x:String>10</x:String>
+                            <x:String>20</x:String>
+                            <x:String>30</x:String>
+                            <x:String>50</x:String>
+                        </Picker.Items>
+                    </Picker>
+                </HorizontalStackLayout>
+            </Grid>
+
+            <syncfusion:SfDataGrid x:Name="dataGrid"
+                                   Grid.Row="1"
+                                   AutoGenerateColumnsMode="None"
+                                   ColumnWidthMode="Auto"
+                                   HeaderGridLinesVisibility="Both"
+                                   GridLinesVisibility="Both"
+                                   ShowRowHeader="True"
+                                   RowHeaderWidth="44"
+                                   AllowEditing="True"
+                                   NavigationMode="Cell"
+                                   ItemsSource="{Binding Source={x:Reference dataPager}, Path=PagedSource}">
+
+                <syncfusion:SfDataGrid.RowHeaderTemplate>
+                    <DataTemplate>
+                        <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}"
+                                  IsVisible="{Binding Converter={StaticResource RowHeaderIsDataRowConverter}}"
+                                  VerticalOptions="Center"
+                                  HorizontalOptions="Center"/>
+                    </DataTemplate>
+                </syncfusion:SfDataGrid.RowHeaderTemplate>
+
+                <syncfusion:SfDataGrid.DefaultStyle>
+                    <syncfusion:DataGridStyle
+                            StackedHeaderRowFontAttributes="Bold" StackedHeaderRowFontFamily="Roboto-Regular"/>
+                </syncfusion:SfDataGrid.DefaultStyle>
+
+                <syncfusion:SfDataGrid.StackedHeaderRows>
+                    <syncfusion:DataGridStackedHeaderRow>
+                        <syncfusion:DataGridStackedHeaderRow.Columns>
+                            <syncfusion:DataGridStackedColumn ColumnMappingNames="OrderID" Text="Order ID" MappingName="OrderInfo" />
+                            <syncfusion:DataGridStackedColumn ColumnMappingNames="CustomerImage,CustomerName" Text="Customer Details" MappingName="CustomerDetails" />
+                            <syncfusion:DataGridStackedColumn ColumnMappingNames="ProductID,OrderDate,Quantity,Freight" Text="Product Details" MappingName="ProductDetails" />
+                            <syncfusion:DataGridStackedColumn ColumnMappingNames="ShipCountry,ShipCity" Text="Shipping Information" MappingName="ShippingInfo" />
+                        </syncfusion:DataGridStackedHeaderRow.Columns>
+                    </syncfusion:DataGridStackedHeaderRow>
+                </syncfusion:SfDataGrid.StackedHeaderRows>
+
+                <syncfusion:SfDataGrid.Columns>
+
+                    <syncfusion:DataGridNumericColumn MappingName="OrderID" HeaderText="Order ID" Format="0" Width="100"/>
+
+                    <syncfusion:DataGridTemplateColumn MappingName="CustomerImage" HeaderText="Profile" Width="80">
+                        <syncfusion:DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Border WidthRequest="36" HeightRequest="36" Padding="0" BackgroundColor="#E6E6FA" StrokeThickness="0"
+                                            StrokeShape="RoundRectangle 18" VerticalOptions="Center" HorizontalOptions="Center">
+                                        <Image Source="{Binding CustomerImage}" Aspect="AspectFill" WidthRequest="36" HeightRequest="36"/>
+                                    </Border>
+                                </Grid>
+                            </DataTemplate>
+                        </syncfusion:DataGridTemplateColumn.CellTemplate>
+                    </syncfusion:DataGridTemplateColumn>
+
+                    <syncfusion:DataGridTextColumn MappingName="CustomerName" HeaderText="Customer Name" Width="150"/>
+
+                    <syncfusion:DataGridTextColumn MappingName="ProductID" HeaderText="Product ID" Width="145"/>
+
+                    <syncfusion:DataGridDateColumn  MappingName="OrderDate" Width="140"  Format="dd/MM/yyyy">
+                        <syncfusion:DataGridDateColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <HorizontalStackLayout Spacing="5" VerticalOptions="Center" Padding="10,0,0,0">
+                                    <Label Text="📅" VerticalOptions="Center" />
+                                    <Label Text="Order Date" VerticalOptions="Center" FontAttributes="Bold" FontFamily="Roboto-Regular"/>
+                                </HorizontalStackLayout>
+                            </DataTemplate>
+                        </syncfusion:DataGridDateColumn.HeaderTemplate>
+                    </syncfusion:DataGridDateColumn>
+
+                    <syncfusion:DataGridNumericColumn  MappingName="Quantity" Width="120" Format="N0">
+                        <syncfusion:DataGridNumericColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <HorizontalStackLayout Spacing="5" VerticalOptions="Center" Padding="10,0,0,0">
+                                    <Label Text="📦" VerticalOptions="Center"/>
+                                    <Label Text="Quantity" VerticalOptions="Center" FontAttributes="Bold" FontFamily="Roboto-Regular"/>
+                                </HorizontalStackLayout>
+                            </DataTemplate>
+                        </syncfusion:DataGridNumericColumn.HeaderTemplate>
+                    </syncfusion:DataGridNumericColumn>
+
+                    <syncfusion:DataGridNumericColumn MappingName="Freight" Width="120" Format="C">
+                        <syncfusion:DataGridNumericColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <HorizontalStackLayout Spacing="5" VerticalOptions="Center" Padding="10,0,0,0">
+                                    <Label Text="🚚" VerticalOptions="Center"/>
+                                    <Label Text="Freight" VerticalOptions="Center" FontAttributes="Bold" FontFamily="Roboto-Regular"/>
+                                </HorizontalStackLayout>
+                            </DataTemplate>
+                        </syncfusion:DataGridNumericColumn.HeaderTemplate>
+                    </syncfusion:DataGridNumericColumn>
+
+                    <syncfusion:DataGridTemplateColumn MappingName="ShipCountry" Width="140">
+                        <syncfusion:DataGridTemplateColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <HorizontalStackLayout Spacing="5" VerticalOptions="Center" Padding="10,0,0,0">
+                                    <Label Text="📌" VerticalOptions="Center" />
+                                    <Label Text="Ship Country" VerticalOptions="Center" FontAttributes="Bold" FontFamily="Roboto-Regular"/>
+                                </HorizontalStackLayout>
+                            </DataTemplate>
+                        </syncfusion:DataGridTemplateColumn.HeaderTemplate>
+                        <syncfusion:DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <HorizontalStackLayout VerticalOptions="Center" Spacing="5">
+                                    <Image Source="{Binding ShipCountry, Converter={StaticResource CountryToFlagConverter}}" HeightRequest="20" WidthRequest="30" Aspect="AspectFit" />
+                                    <Label Text="{Binding ShipCountry}" VerticalOptions="Center" />
+                                </HorizontalStackLayout>
+                            </DataTemplate>
+                        </syncfusion:DataGridTemplateColumn.CellTemplate>
+                    </syncfusion:DataGridTemplateColumn>
+
+                    <syncfusion:DataGridTextColumn MappingName="ShipCity" HeaderText="Ship City" Width="100"/>
+
+                    <syncfusion:DataGridTemplateColumn MappingName="PaymentStatus" HeaderText="Payment Status" Width="110">
+                        <syncfusion:DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Border StrokeShape="RoundRectangle 12" StrokeThickness="1" Padding="8,2"
+                                        Stroke="{Binding PaymentStatus, Converter={StaticResource PaymentStatusToColor}}"
+                                        BackgroundColor="Transparent" HorizontalOptions="Center" VerticalOptions="Center">
+                                    <HorizontalStackLayout Spacing="5" VerticalOptions="Center">
+                                        <Ellipse Fill="{Binding PaymentStatus, Converter={StaticResource PaymentStatusToColor}}" WidthRequest="8" HeightRequest="8" />
+                                        <Label Text="{Binding PaymentStatus}" FontSize="12" FontAttributes="Bold"
+                                               TextColor="{Binding PaymentStatus, Converter={StaticResource PaymentStatusToColor}}"/>
+                                    </HorizontalStackLayout>
+                                </Border>
+                            </DataTemplate>
+                        </syncfusion:DataGridTemplateColumn.CellTemplate>
+                    </syncfusion:DataGridTemplateColumn>
+
+                    <syncfusion:DataGridTemplateColumn MappingName="Rating" HeaderText="Rating" Width="150">
+                        <syncfusion:DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <HorizontalStackLayout Spacing="5" Padding="5" HorizontalOptions="Start" VerticalOptions="Center">
+                                    <Label Text="{Binding Rating}" FontSize="12" VerticalOptions="Center"/>
+                                    <inputs:SfRating Value="{Binding Rating}"
+                                                     ItemCount="5"
+                                                     IsReadOnly="True"
+                                                     Precision="Half"
+                                                     ItemSize="16">
+                                        <inputs:SfRating.RatingSettings>
+                                            <inputs:RatingSettings RatedFill="Orange" UnratedFill="#EEEEEE" />
+                                        </inputs:SfRating.RatingSettings>
+                                    </inputs:SfRating>
+                                </HorizontalStackLayout>
+                            </DataTemplate>
+                        </syncfusion:DataGridTemplateColumn.CellTemplate>
+                    </syncfusion:DataGridTemplateColumn>
+
+                    <syncfusion:DataGridTemplateColumn MappingName="Commands" HeaderText="Commands" Width="115">
+                        <syncfusion:DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <HorizontalStackLayout Spacing="12" HorizontalOptions="Center" VerticalOptions="Center">
+                                    <ImageButton Source="edit.png"
+                                                 HeightRequest="18"
+                                                 WidthRequest="18"
+                                                 BackgroundColor="Transparent"
+                                                 Clicked="OnEditRowClicked"/>
+                                    <ImageButton Source="delete.png"
+                                                 HeightRequest="18"
+                                                 WidthRequest="18"
+                                                 BackgroundColor="Transparent"
+                                                 Clicked="OnDeleteRowClicked"/>
+                                </HorizontalStackLayout>
+                            </DataTemplate>
+                        </syncfusion:DataGridTemplateColumn.CellTemplate>
+                    </syncfusion:DataGridTemplateColumn>
+
+                </syncfusion:SfDataGrid.Columns>
+
+                <syncfusion:SfDataGrid.TableSummaryRows>
+                    <syncfusion:DataGridTableSummaryRow Position="Bottom" ShowSummaryInRow="False">
+                        <syncfusion:DataGridTableSummaryRow.SummaryColumns>
+                            <syncfusion:DataGridSummaryColumn Name="TotalOrders"
+                                                             MappingName="ProductID"
+                                                             SummaryType="CountAggregate"
+                                                             Format="🛒 Total Order: {Count}" />
+                            <syncfusion:DataGridSummaryColumn Name="SumFreight"
+                                                             MappingName="Freight"
+                                                             SummaryType="DoubleAggregate"
+                                                             Format="Sum: {Sum:C2}" />
+                            <syncfusion:DataGridSummaryColumn Name="AvgRating"
+                                                             MappingName="Rating"
+                                                             SummaryType="DoubleAggregate"
+                                                             Format="Avg Rating: {Average:N1}" />
+                        </syncfusion:DataGridTableSummaryRow.SummaryColumns>
+                    </syncfusion:DataGridTableSummaryRow>
+                </syncfusion:SfDataGrid.TableSummaryRows>
+
+            </syncfusion:SfDataGrid>
+
+        </Grid>
+    </ContentPage.Content>
+
+</ContentPage>
