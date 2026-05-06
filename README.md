@@ -22,15 +22,12 @@ The examples in this repository cover the following DataGrid features:
 - Basic DataGrid configuration and data binding
 - Column types and column customization
 - Sorting, filtering, and grouping
-- Stacked headers
 - Cell and row styling
-- Custom cell renderers
 - Selection modes
 - Table and group summary rows
-- Row height and column width customization
 - Editing and validation
+- Localization and accessbility
 - Performance optimization scenarios
-- Exporting DataGrid content (PDF / Excel – where applicable)
 
 Each feature is implemented independently to keep the samples focused and easy to understand.
  
