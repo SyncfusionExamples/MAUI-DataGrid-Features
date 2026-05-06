@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.DataGrid;assembly=Syncfusion.Maui.DataGrid"
+             xmlns:local="clr-namespace:Localization.ViewModel"
+             x:Class="Localization.MainPage">
+
+    <ContentPage.BindingContext>
+        <local:CollaborateursViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <Style TargetType="syncfusion:DataGridHeaderCell">
+            <Setter Property="FontFamily"
+                    Value="Roboto-Medium" />
+        </Style>
+        <Style TargetType="syncfusion:DataGridCell">
+            <Setter Property="FontFamily"
+                    Value="Roboto-Regular" />
+        </Style>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <syncfusion:SfDataGrid ItemsSource="{Binding Collaborateurs}"
+                               FilterRowPosition="Top">
+            <syncfusion:SfDataGrid.Columns>
+
+                <syncfusion:DataGridTextColumn
+                        MappingName="Identifiant"
+                        HeaderText="ID Collaborateur"
+                        Width="140" />
+
+                <syncfusion:DataGridTextColumn
+                        MappingName="Nom"
+                        HeaderText="Nom de famille"
+                        Width="130" />
+
+                <syncfusion:DataGridTextColumn
+                        MappingName="Prenom"
+                        HeaderText="Prénom"
+                        Width="100" />
+
+                <syncfusion:DataGridDateColumn
+                        MappingName="DateNaissance"
+                        HeaderText="Date de naissance"
+                        Format="dd/MM/yyyy"
+                        Width="160" />
+
+                <syncfusion:DataGridTextColumn
+                        MappingName="Poste"
+                        HeaderText="Fonction"
+                        Width="180" />
+
+                <syncfusion:DataGridTextColumn
+                        MappingName="Departement"
+                        HeaderText="Département"
+                        Width="180" />
+
+                <syncfusion:DataGridTextColumn
+                        MappingName="Ville"
+                        HeaderText="Ville"
+                        Width="120" />
+
+                <syncfusion:DataGridTextColumn
+                        MappingName="EmailProfessionnel"
+                        HeaderText="Adresse e-mail professionnelle"
+                        Width="240" />
+
+                <syncfusion:DataGridNumericColumn
+                        MappingName="SalaireMensuel"
+                        HeaderText="Salaire mensuel (€)"
+                        Format="C2"
+                        Width="150" />
+
+                <syncfusion:DataGridCheckBoxColumn
+                        MappingName="EstEnActivite"
+                        HeaderText="Statut actif"
+                        Width="120" />
+
+            </syncfusion:SfDataGrid.Columns>
+        </syncfusion:SfDataGrid>
+    </ContentPage.Content>
+
+</ContentPage>
